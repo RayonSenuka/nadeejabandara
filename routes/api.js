@@ -1,4 +1,13 @@
 // POST /api/contact  ->  email the message to the site owner
+const express = require('express');
+const router = express.Router();
+
+// your routes, e.g.
+router.get('/hello', (req, res) => {
+  res.json({ message: 'Hello' });
+});
+
+module.exports = router;
 router.post('/contact', async (req, res) => {
   const { name, email, message } = req.body || {};
   if (!name || !email || !message) {

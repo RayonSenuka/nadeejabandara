@@ -22,7 +22,7 @@ if (isHome) {
 }
 
 document.getElementById('site-nav').innerHTML = `
-  <a class="logo" href="${isHome ? '#home' : 'index.html'}">NADEE<span>J</span>A</a>
+  <a class="logo" href="${isHome ? '#home' : 'index.html'}">NADEEJA BANDARA</a>
   <div class="links">
     ${pages.map(p => {
       const href = isHome && p.section !== 'categories' ? `#${p.section}` : p.href;
@@ -79,6 +79,26 @@ if (isHome) {
 
   const links = document.querySelectorAll('#site-nav .links a');
   const sectionLinks = document.querySelectorAll('#site-nav a[href^="#"]');
+  const sections = Array.from(links, link =>
+    document.getElementById(link.hash.slice(1))
+  ).filter(Boolean);
+  const updateActiveSection = () => {
+    const activationLine = window.innerHeight * 0.4;
+    let activeSection = sections[0];
+
+    sections.forEach(section => {
+      if (section.getBoundingClientRect().top <= activationLine) {
+        activeSection = section;
+      }
+    });
+
+    links.forEach(link => {
+      link.classList.toggle('on', link.hash === `#${activeSection.id}`);
+    });
+  };
+  window.addEventListener('scroll', updateActiveSection, { passive: true });
+  window.addEventListener('resize', updateActiveSection);
+
   sectionLinks.forEach(link => link.addEventListener('click', event => {
     const sectionId = link.hash.slice(1);
     const target = document.getElementById(sectionId);
@@ -93,6 +113,7 @@ if (isHome) {
       target.scrollIntoView({ block: 'start', behavior: 'instant' });
     }
   }));
+  updateActiveSection();
 
   const initialSection = location.hash
     ? document.getElementById(location.hash.slice(1))
@@ -103,7 +124,7 @@ if (isHome) {
   }
 }
 
-document.getElementById('site-footer').textContent = '© 2026 NADEEJA · madebynadeeja';
+document.getElementById('site-footer').textContent = '© 2026 NADEEJA · nadeejabandara';
 
 const revealTargets = document.querySelectorAll(
   '.hero-photo, .hero-line, main > .page-section, main > h2, main > .sub, main > .about, main > .stats, .filters, main > .grid, main > .cgrid'

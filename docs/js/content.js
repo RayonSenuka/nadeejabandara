@@ -26,7 +26,7 @@ const featuredReel = document.getElementById('home')
       </div>
       <div class="b reel-caption">
         <h3>Iphone 18 Pro Max</h3>
-        <p class="reel-author">@madebynadeeja</p>
+        <p class="reel-author">@nadeejabandara</p>
       </div>
     </article>`
 
@@ -112,7 +112,7 @@ function render(cat) {
         </div>
         <div class="b reel-caption">
           <h3>${i.title}</h3>
-          <p class="reel-author">@madebynadeeja</p>
+          <p class="reel-author">@nadeejabandara</p>
         </div>
       </article>`).join('')}`;
   initializeReels();
